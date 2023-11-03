@@ -19,7 +19,10 @@ def open_chrome_browser(browser_configs):
         
         for argument in browser_configs['chorme_arguments']:
             if browser_configs['chorme_arguments'][argument] == "True":
-                chromeOptions.add_argument(f'--{argument.strip()}')
+                if argument == 'headless':
+                    chromeOptions.add_argument('headless=new')
+                else:
+                    chromeOptions.add_argument(f'--{argument.strip()}')
 
         chrome_size_parm = list(browser_configs['chrome_size'].keys())[0]
         chrome_size = browser_configs['chrome_size'][chrome_size_parm]
